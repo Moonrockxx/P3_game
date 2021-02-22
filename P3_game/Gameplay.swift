@@ -13,6 +13,7 @@ class Gameplay {
     var playerTwo: Player
     
     var roundCount: Int = 1
+    var namesOfPlayers = [String] ()
     
     init(playerOne: Player, playerTwo: Player) {
         self.playerOne = playerOne
@@ -21,17 +22,32 @@ class Gameplay {
     
     // - Function that allows to assign a name to each player
     func assignNameToPlayer(player: Player) -> String {
-        
+        if player.name.isEmpty {
+            print("Choose your nickname : ")
+            if let playerNameChoice = readLine() {
+                let nameChoice = playerNameChoice.trimmingCharacters(in: .whitespaces)
+                if nameChoice.count < 3 && namesOfPlayers.contains(nameChoice) {
+                    print("This nickname is already taken or must have at least 3 characters")
+                } else {
+                    player.name = nameChoice
+                    namesOfPlayers.append(nameChoice)
+                }
+            }
+        }
+        return player.name
     }
     
     // - Function that lets you know whose turn it is in relation to the number of turns
-    func whoSTurn() -> Player {
+    private func whoSTurn() -> (attack: Player, defense: Player) {
         let currentTurn = roundCount % 2
         if currentTurn == 0 {
-            return playerOne
+            print("Player One's turn")
+            return (attack: playerOne, defense: playerTwo)
         } else {
-            return playerTwo
+            print("Player Two's turn")
+            return (attack: playerTwo, defense: playerOne)
         }
+        
     }
     
     // - Function who describe a turn
@@ -51,28 +67,32 @@ class Gameplay {
     }
     
     // - Function which allows to know if each member of the team is alive, if they're all dead the function returns false
-    func isTeamAlive(player: Player) -> Bool {
-        
+    func isPlayerAlive(player: Player) -> Bool {
+        if player.team.count == 0 {
+            player.isPlayerAlive = false
+        }
     }
     
     // - Function that's executed while the team's still alive, we check whose turn it's and depending on the result we determine who's the attacker and who's the defender
     func battle() {
-        while isTeamAlive(player: playerOne) && isTeamAlive(player: playerTwo) {
+        while isPlayerAlive(player: playerOne) && isPlayerAlive(player: playerTwo) {
             let playerForTurn = self.whoSTurn()
-            if playerForTurn === playerOne {
-                print("Player One's turn")
-                oneTurn(attack: playerOne, defense: playerTwo)
-                roundCount += 1
-            } else {
-                print("Player Two's turn")
-                oneTurn(attack: playerTwo, defense: playerOne)
-                roundCount += 1
-            }
+            
+            oneTurn(attack: playerForTurn.attack, defense: playerForTurn.defense)
+            roundCount += 1
         }
     }
     
     // - Function that displays the winner and the stats of the characters of each team
     func gameOver() {
-        
+        if playerOne.isPlayerAlive {
+            print("\(playerOne.name) wins the game")
+            print("Your team : \(playerOne.team)")
+            print("Loosing team : \(playerTwo.team)")
+        } else {
+            print("\(playerTwo.name) wins the game")
+            print("Your team : \(playerTwo.team)")
+            print("Loosing team : \(playerOne.team)")
+        }
     }
 }
