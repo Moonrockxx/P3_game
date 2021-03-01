@@ -40,15 +40,20 @@ class Player {
      a character from the list and can then name him. If the name exceeds 3 characters and it's
      not already taken, the function add this character to the team Array
      */
-    func selectCharactersForCreateTeam(character: Character) {
+    func selectCharactersForCreateTeam() {
+        
+        let viking = Viking(name: "")
+        let archer = Archer(name: "")
+        let magician = Magician(name: "")
+        let fairy = Fairy(name: "")
         
         while team.count < 3 {
             print("""
                 \(self.name) choose a character to add to your team :
-                1 - \(String(describing: Character.info(Viking(name: ""))))
-                2 - \(String(describing: Character.info(Archer(name: ""))))
-                3 - \(String(describing: Character.info(Magician(name: ""))))
-                4 - \(String(describing: Character.info(Fairy(name: ""))))
+                1 - \(viking.info())
+                2 - \(archer.info())
+                3 - \(magician.info())
+                4 - \(fairy.info())
             """)
             
             if let characterChoice = readLine() {
@@ -90,10 +95,10 @@ class Player {
      It displays the list of team characters and reads the player's choice. We check that the
      choice is between 1 or the number of characters remaining in the team so as not to choose a dead character
      */
-    func selectACharacterForAction(team: [Character]) -> Character {
+    func selectACharacterForAction() -> Character {
         print("Choose à number between 1 & 3 to select a character of your team to do an action with : ")
         for(index, character) in team.enumerated() {
-            print("\(index + 1)'s called \(character.name) : \(character.info(character: character))")
+            print("\(index + 1)'s called \(character.name) : \(character.info())")
         }
         if let choice = readLine() {
             if let intChoice = Int(choice) {
@@ -102,6 +107,6 @@ class Player {
                 }
             }
         }
-        return selectACharacterForAction(team: team)
+        return selectACharacterForAction()
     }
 }

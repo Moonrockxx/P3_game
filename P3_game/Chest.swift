@@ -26,6 +26,10 @@ class Chest {
         let randomAppear = Int.random(in: 1...100)
         if randomAppear <= 50 {
             print("A magic chest appears")
+            return true
+        } else {
+            print("No magic chest appears")
+            return false
         }
     }
     

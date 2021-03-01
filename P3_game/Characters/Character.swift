@@ -33,16 +33,12 @@ class Character {
     
     // - Function that check if the characters is alive
     func isAlive() -> Bool {
-        if self.life <= 0 {
-            return false
-        } else {
-            return true
-        }
+        return self.life <= 0
     }
     
     // - Function that presents the attributes of a character
-    func info(character: Character) {
-        print("\(character.name) - Life : \(character.life) - Weapon : \(character.weapon)")
+    func info() -> String {
+        return "\(self.name) - Life : \(self.life) - Weapon : \(self.weapon)"
     }
     
     // - Function that allows to remove life points from the opponent or add them to allies depending on the type of character chosen

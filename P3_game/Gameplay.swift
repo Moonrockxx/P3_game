@@ -9,16 +9,11 @@ import Foundation
 
 class Gameplay {
     
-    var playerOne: Player
-    var playerTwo: Player
+    var playerOne: Player = Player(name: "", isPlayerAlive: true)
+    var playerTwo: Player = Player(name: "", isPlayerAlive: true)
     
     var roundCount: Int = 1
     var namesOfPlayers = [String] ()
-    
-    init(playerOne: Player, playerTwo: Player) {
-        self.playerOne = playerOne
-        self.playerTwo = playerTwo
-    }
     
     // - Function that allows to assign a name to each player
     func assignNameToPlayer(player: Player) {
@@ -52,16 +47,16 @@ class Gameplay {
     // - Function who describe a turn
     func oneTurn(attack: Player, defense: Player) {
         
-        let attackingCharacter = attack.selectACharacterForAction(team: attack.team)
+        let attackingCharacter = attack.selectACharacterForAction()
         
         let chest = Chest()
         chest.getRandomWeapon(character: attackingCharacter)
         
         if let fairy = attackingCharacter as? Fairy {
-            let target = attack.selectACharacterForAction(team: attack.team)
+            let target = attack.selectACharacterForAction()
             fairy.action(target: target)
         } else {
-            let target = attack.selectACharacterForAction(team: defense.team)
+            let target = defense.selectACharacterForAction()
             attackingCharacter.action(target: target)
             if target.isAlive() {
                 print("\(target.name) has \(target.life) remaining")
@@ -89,6 +84,7 @@ class Gameplay {
             oneTurn(attack: playerForTurn.attack, defense: playerForTurn.defense)
             roundCount += 1
         }
+        self.gameOver()
     }
     
     // - Function that displays the winner and the stats of the characters of each team
@@ -107,5 +103,11 @@ class Gameplay {
     func start() {
         self.assignNameToPlayer(player: playerOne)
         self.assignNameToPlayer(player: playerTwo)
+        
+        playerOne.selectCharactersForCreateTeam()
+        playerTwo.selectCharactersForCreateTeam()
+        
+        battle()
+        
     }
 }
