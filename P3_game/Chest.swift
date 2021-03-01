@@ -29,26 +29,34 @@ class Chest {
         }
     }
     
-    // - Check that the type of weapon in the chest matches the type of character playing
-    func twoTypesMatch() -> Bool {
-        
-    }
-    
-    // - Returns a random number between 1 and 4 corresponding to a chest weapon
-    func getRandomWeapon() -> Weapon {
+    // - Assign a random weapon to a character according to his type
+    func getRandomWeapon(character: Character) {
         if self.isChestHere() {
-            let randomChestContent = Int.random(in: 1...4)
+            let randomChestContent = Int.random(in: 1...3)
             switch randomChestContent {
             case 1:
-                <#code#>
+                print("\(character.name) found a Legendary Sword")
+                if character.type != .attack {
+                    print("Cannot assign an attack weapon to healing or magic characters")
+                } else {
+                    character.weapon = attackWeapon
+                }
             case 2:
-                <#code#>
+                print("\(character.name) found a Celestial Lightening")
+                if character.type != .magic {
+                    print("Cannot assign a magic weapon to attack or healing characters")
+                } else {
+                    character.weapon = attackWeapon
+                }
             case 3:
-                <#code#>
-            case 4:
-                <#code#>
+                print("\(character.name) found Elf Blood")
+                if character.type != .heal {
+                    print("Cannot assign an heal weapon to attack or magic characters")
+                } else {
+                    character.weapon = attackWeapon
+                }
             default:
-                print(" ")
+                print("Can't process")
             }
         }
     }

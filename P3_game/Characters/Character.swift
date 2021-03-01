@@ -21,14 +21,23 @@ class Character {
     var type: characterType
     var weapon: Weapon
     
-    var minLife: Int = 0
-    var isAlive: Bool = true
+//    var minLife: Int = 0
+//    var isAlive: Bool = true
     
     init(name: String, life: Int, type: characterType, weapon: Weapon) {
         self.name = name
         self.type = type
         self.life = life
         self.weapon = weapon
+    }
+    
+    // - Function that check if the characters is alive
+    func isAlive() -> Bool {
+        if self.life <= 0 {
+            return false
+        } else {
+            return true
+        }
     }
     
     // - Function that presents the attributes of a character

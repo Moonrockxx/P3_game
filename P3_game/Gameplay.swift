@@ -21,7 +21,7 @@ class Gameplay {
     }
     
     // - Function that allows to assign a name to each player
-    func assignNameToPlayer(player: Player) -> String {
+    func assignNameToPlayer(player: Player) {
         if player.name.isEmpty {
             print("Choose your nickname : ")
             if let playerNameChoice = readLine() {
@@ -34,7 +34,6 @@ class Gameplay {
                 }
             }
         }
-        return player.name
     }
     
     // - Function that lets you know whose turn it is in relation to the number of turns
@@ -52,10 +51,11 @@ class Gameplay {
     
     // - Function who describe a turn
     func oneTurn(attack: Player, defense: Player) {
-        //- Apparition du coffre ?
-        //- Si l'arme est de même type on l'assigne
         
         let attackingCharacter = attack.selectACharacterForAction(team: attack.team)
+        
+        let chest = Chest()
+        chest.getRandomWeapon(character: attackingCharacter)
         
         if let fairy = attackingCharacter as? Fairy {
             let target = attack.selectACharacterForAction(team: attack.team)
@@ -63,13 +63,21 @@ class Gameplay {
         } else {
             let target = attack.selectACharacterForAction(team: defense.team)
             attackingCharacter.action(target: target)
+            if target.isAlive() {
+                print("\(target.name) has \(target.life) remaining")
+            } else {
+                print("\(target.name)'s going to the graveyard")
+                defense.graveyard.append(target)
+            }
         }
     }
     
     // - Function which allows to know if each member of the team is alive, if they're all dead the function returns false
     func isPlayerAlive(player: Player) -> Bool {
         if player.team.count == 0 {
-            player.isPlayerAlive = false
+            return false
+        } else {
+            return true
         }
     }
     
@@ -88,11 +96,16 @@ class Gameplay {
         if playerOne.isPlayerAlive {
             print("\(playerOne.name) wins the game")
             print("Your team : \(playerOne.team)")
-            print("Loosing team : \(playerTwo.team)")
+            print("Loosing team : \(playerTwo.graveyard)")
         } else {
             print("\(playerTwo.name) wins the game")
             print("Your team : \(playerTwo.team)")
-            print("Loosing team : \(playerOne.team)")
+            print("Loosing team : \(playerOne.graveyard)")
         }
+    }
+    
+    func start() {
+        self.assignNameToPlayer(player: playerOne)
+        self.assignNameToPlayer(player: playerTwo)
     }
 }

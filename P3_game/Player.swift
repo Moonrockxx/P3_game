@@ -9,31 +9,11 @@ import Foundation
 
 
 class Player {
-    
-    // - Enumeration which will allow us to return a string according to the type of character chosen
-    enum CharacterType: Int, CaseIterable {
-        case viking, archer, magician, fairy
-        
-        // - Function that allows the character to present their attributes
-        func info() -> String {
-            switch self {
-            case .viking:
-                <#code#>
-            case .archer:
-                <#code#>
-            case .magician:
-                <#code#>
-            case .fairy:
-                <#code#>
-            default:
-                <#code#>
-            }
-        }
-    }
-    
+
     var name: String
     var isPlayerAlive: Bool = true
     var team = [Character] ()
+    var graveyard = [Character] ()
     var allCharactersName = [String] ()
     
     init(name: String, isPlayerAlive: Bool) {
