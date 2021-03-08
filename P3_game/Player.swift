@@ -26,7 +26,7 @@ class Player {
     func assignNameToCharacter() -> String {
         if let characterNameChoice = readLine() {
             let choice = characterNameChoice.trimmingCharacters(in: .whitespaces)
-            if choice.count < 3 && allCharactersName.contains(choice) {
+            if choice.count < 3 || allCharactersName.contains(choice) {
                 print("You must choose a name that does not exist and with at least 3 characters")
             } else {
                 return choice
@@ -42,18 +42,18 @@ class Player {
      */
     func selectCharactersForCreateTeam() {
         
-        let viking = Viking(name: "")
-        let archer = Archer(name: "")
-        let magician = Magician(name: "")
-        let fairy = Fairy(name: "")
+        let viking = Viking(name: "Viking")
+        let archer = Archer(name: "Archer")
+        let magician = Magician(name: "Magician")
+        let fairy = Fairy(name: "Fairy")
         
         while team.count < 3 {
             print("""
                 \(self.name) choose a character to add to your team :
-                1 - \(viking.info())
-                2 - \(archer.info())
-                3 - \(magician.info())
-                4 - \(fairy.info())
+                1 - \(viking.info()) \(viking.weapon.weaponInfo())
+                2 - \(archer.info()) \(archer.weapon.weaponInfo())
+                3 - \(magician.info()) \(magician.weapon.weaponInfo())
+                4 - \(fairy.info()) \(fairy.weapon.weaponInfo())
             """)
             
             if let characterChoice = readLine() {

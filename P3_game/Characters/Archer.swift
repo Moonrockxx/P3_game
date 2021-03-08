@@ -9,7 +9,7 @@ import Foundation
 
 class Archer : Character {
     
-    init(name: String) {
-        super.init(name: "Archer", life: 120, type: .attack, weapon: LightBow())
+    init(name: String = "Archer") {
+        super.init(name: name, life: 120, type: .attack, weapon: LightBow())
     }
 }

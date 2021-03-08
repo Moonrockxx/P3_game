@@ -29,7 +29,7 @@ class Weapon {
     }
     
     // - Give the weapon informations
-    func weaponInfo(weapon: Weapon) {
-        print("\(weapon.name) - Attack Power : \(weapon.attackPower) - Heal Power : \(weapon.healPower)")
+    func weaponInfo() -> String {
+        return "--> Attack Power : \(self.attackPower) - Heal Power : \(self.healPower)"
     }
 }

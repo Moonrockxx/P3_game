@@ -9,7 +9,7 @@ import Foundation
 
 class Fairy : Character {
     
-    init(name: String) {
-        super.init(name: "Fairy", life: 110, type: .heal, weapon: HealingDust())
+    init(name: String = "Fairy") {
+        super.init(name: name, life: 110, type: .heal, weapon: HealingDust())
     }
 }

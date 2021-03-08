@@ -38,7 +38,7 @@ class Character {
     
     // - Function that presents the attributes of a character
     func info() -> String {
-        return "\(self.name) - Life : \(self.life) - Weapon : \(self.weapon)"
+        return "\(self.name) - Life : \(self.life) - Weapon : \(self.weapon.name)"
     }
     
     // - Function that allows to remove life points from the opponent or add them to allies depending on the type of character chosen
