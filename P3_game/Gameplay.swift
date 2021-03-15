@@ -12,7 +12,7 @@ class Gameplay {
     var playerOne: Player = Player(name: "", isPlayerAlive: true)
     var playerTwo: Player = Player(name: "", isPlayerAlive: true)
     
-    var roundCount: Int = 1
+    var roundCount: Int = 0
     var namesOfPlayers = [String] ()
     
     // - Function that allows to assign a name to each player
@@ -50,7 +50,7 @@ class Gameplay {
         let attackingCharacter = attack.selectACharacterForAction()
         
         let chest = Chest()
-        chest.getRandomWeapon(character: attackingCharacter)
+        chest.assignRandomWeapon(character: attackingCharacter)
         
         if let fairy = attackingCharacter as? Fairy {
             let target = attack.selectACharacterForAction()
@@ -65,6 +65,7 @@ class Gameplay {
                 defense.graveyard.append(target)
             }
         }
+
     }
     
     // - Function which allows to know if each member of the team is alive, if they're all dead the function returns false

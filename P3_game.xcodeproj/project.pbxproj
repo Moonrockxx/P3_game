@@ -21,7 +21,6 @@
 		60A6798325D484C400FDD165 /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A6798225D484C400FDD165 /* Character.swift */; };
 		60A6798625D4857000FDD165 /* Weapon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A6798525D4857000FDD165 /* Weapon.swift */; };
 		60A6798925D4863D00FDD165 /* Chest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A6798825D4863D00FDD165 /* Chest.swift */; };
-		60A6798C25D4864E00FDD165 /* Tools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A6798B25D4864E00FDD165 /* Tools.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -52,7 +51,6 @@
 		60A6798225D484C400FDD165 /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
 		60A6798525D4857000FDD165 /* Weapon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weapon.swift; sourceTree = "<group>"; };
 		60A6798825D4863D00FDD165 /* Chest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chest.swift; sourceTree = "<group>"; };
-		60A6798B25D4864E00FDD165 /* Tools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tools.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,7 +89,6 @@
 				60A6797C25D47EEF00FDD165 /* Gameplay.swift */,
 				60A6797F25D4803300FDD165 /* Player.swift */,
 				60A6798825D4863D00FDD165 /* Chest.swift */,
-				60A6798B25D4864E00FDD165 /* Tools.swift */,
 			);
 			path = P3_game;
 			sourceTree = "<group>";
@@ -183,7 +180,6 @@
 				60A6798025D4803300FDD165 /* Player.swift in Sources */,
 				60A6798925D4863D00FDD165 /* Chest.swift in Sources */,
 				603FC3E325DBFD42009544E6 /* FireBomb.swift in Sources */,
-				60A6798C25D4864E00FDD165 /* Tools.swift in Sources */,
 				603FC3D625DBF46D009544E6 /* Fairy.swift in Sources */,
 				60A6797D25D47EEF00FDD165 /* Gameplay.swift in Sources */,
 				60A6798325D484C400FDD165 /* Character.swift in Sources */,

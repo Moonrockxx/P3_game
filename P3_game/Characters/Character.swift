@@ -16,9 +16,9 @@ class Character {
         case heal = 3
     }
     
-    var name: String
+    let name: String
     var life: Int
-    var type: characterType
+    let type: characterType
     var weapon: Weapon
     
 //    var minLife: Int = 0
@@ -33,7 +33,7 @@ class Character {
     
     // - Function that check if the characters is alive
     func isAlive() -> Bool {
-        return self.life <= 0
+        return self.life > 0
     }
     
     // - Function that presents the attributes of a character
@@ -44,9 +44,19 @@ class Character {
     // - Function that allows to remove life points from the opponent or add them to allies depending on the type of character chosen
     func action(target: Character) {
         if self.type == .attack || self.type == .magic {
-            target.life -= self.weapon.attackPower
+            target.life.sub(value: self.weapon.attackPower, min: 0)
         } else {
             target.life += self.weapon.healPower
+        }
+    }
+}
+
+extension Int {
+    mutating func sub(value: Int, min: Int) {
+        if (self - value) <= min {
+            self = min
+        } else {
+            self -= value
         }
     }
 }

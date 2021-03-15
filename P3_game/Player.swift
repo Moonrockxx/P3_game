@@ -49,11 +49,13 @@ class Player {
         
         while team.count < 3 {
             print("""
+            ---------------------------------------------------------
                 \(self.name) choose a character to add to your team :
                 1 - \(viking.info()) \(viking.weapon.weaponInfo())
                 2 - \(archer.info()) \(archer.weapon.weaponInfo())
                 3 - \(magician.info()) \(magician.weapon.weaponInfo())
                 4 - \(fairy.info()) \(fairy.weapon.weaponInfo())
+            ---------------------------------------------------------
             """)
             
             if let characterChoice = readLine() {
@@ -64,6 +66,10 @@ class Player {
                     allCharactersName.append(characterName)
                     let characterChoosed = Viking(name: characterName)
                     team.append(characterChoosed)
+                    print("""
+                    Your viking's called \(characterName)
+                    ---------------------------------------------------------
+                    """)
                 case "2":
                     print("You choose an Archer, give him a name :")
                     let characterName = assignNameToCharacter()

@@ -34,7 +34,7 @@ class Chest {
     }
     
     // - Assign a random weapon to a character according to his type
-    func getRandomWeapon(character: Character) {
+    func assignRandomWeapon(character: Character) {
         if self.isChestHere() {
             let randomChestContent = Int.random(in: 1...3)
             switch randomChestContent {

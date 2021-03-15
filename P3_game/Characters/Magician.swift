@@ -8,7 +8,6 @@
 import Foundation
 
 class Magician : Character {
-    
     init(name: String = "Magician") {
         super.init(name: name, life: 70, type: .magic, weapon: FireBomb())
     }
