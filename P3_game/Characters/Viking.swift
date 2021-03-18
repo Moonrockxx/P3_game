@@ -10,7 +10,7 @@ import Foundation
 class Viking : Character {
     
     init(name: String = "Viking") {
-        super.init(name: name, life: 80, type: .attack, weapon: BattleAxe())
+        super.init(defaultName: "Viking", name: name, life: 80, type: .attack, weapon: BattleAxe())
     }
     
     

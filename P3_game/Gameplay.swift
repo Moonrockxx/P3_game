@@ -9,16 +9,16 @@ import Foundation
 
 class Gameplay {
     
-    var playerOne: Player = Player(name: "", isPlayerAlive: true)
-    var playerTwo: Player = Player(name: "", isPlayerAlive: true)
+    var playerOne: Player = Player(defaultName: "Player One", name: "", isPlayerAlive: true)
+    var playerTwo: Player = Player(defaultName: "Player Two", name: "", isPlayerAlive: true)
     
     var roundCount: Int = 0
     var namesOfPlayers = [String] ()
     
     // - Function that allows to assign a name to each player
-    func assignNameToPlayer(player: Player) {
+    private func assignNameToPlayer(player: Player) {
         if player.name.isEmpty {
-            print("Choose your nickname : ")
+            print("\(player.defaultName) Choose your nickname : ")
             if let playerNameChoice = readLine() {
                 let nameChoice = playerNameChoice.trimmingCharacters(in: .whitespaces)
                 if nameChoice.count < 3 && namesOfPlayers.contains(nameChoice) {
@@ -45,7 +45,7 @@ class Gameplay {
     }
     
     // - Function who describe a turn
-    func oneTurn(attack: Player, defense: Player) {
+    private func oneTurn(attack: Player, defense: Player) {
         
         let attackingCharacter = attack.selectACharacterForAction()
         
@@ -69,7 +69,7 @@ class Gameplay {
     }
     
     // - Function which allows to know if each member of the team is alive, if they're all dead the function returns false
-    func isPlayerAlive(player: Player) -> Bool {
+    private func isPlayerAlive(player: Player) -> Bool {
         if player.team.count == 0 {
             return false
         } else {
@@ -78,7 +78,7 @@ class Gameplay {
     }
     
     // - Function that's executed while the team's still alive, we check whose turn it's and depending on the result we determine who's the attacker and who's the defender
-    func battle() {
+    private func battle() {
         while isPlayerAlive(player: playerOne) && isPlayerAlive(player: playerTwo) {
             let playerForTurn = self.whoSTurn()
             
@@ -89,7 +89,7 @@ class Gameplay {
     }
     
     // - Function that displays the winner and the stats of the characters of each team
-    func gameOver() {
+    private func gameOver() {
         if playerOne.isPlayerAlive {
             print("\(playerOne.name) wins the game")
             print("Your team : \(playerOne.team)")
@@ -101,6 +101,7 @@ class Gameplay {
         }
     }
     
+    // - Function that initialize the game by assign names for both players, each players pick 3 characters to start the battle
     func start() {
         self.assignNameToPlayer(player: playerOne)
         self.assignNameToPlayer(player: playerTwo)

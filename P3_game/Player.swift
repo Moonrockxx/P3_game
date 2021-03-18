@@ -9,21 +9,23 @@ import Foundation
 
 
 class Player {
-
+    
+    let defaultName: String
     var name: String
     var isPlayerAlive: Bool = true
     var team = [Character] ()
     var graveyard = [Character] ()
     var allCharactersName = [String] ()
     
-    init(name: String, isPlayerAlive: Bool) {
+    init(defaultName: String, name: String, isPlayerAlive: Bool) {
+        self.defaultName = defaultName
         self.name = name
         self.isPlayerAlive = isPlayerAlive
     }
     
     
     // - Function that allows to assign a name to each character
-    func assignNameToCharacter() -> String {
+    private func assignNameToCharacter() -> String {
         if let characterNameChoice = readLine() {
             let choice = characterNameChoice.trimmingCharacters(in: .whitespaces)
             if choice.count < 3 || allCharactersName.contains(choice) {
@@ -61,39 +63,58 @@ class Player {
             if let characterChoice = readLine() {
                 switch characterChoice {
                 case "1":
-                    print("You choose a Viking, give him a name :")
+                    print("""
+                    ---------------------------------------------------------
+                    You choose a Viking, give him a name :
+                    """)
                     let characterName = assignNameToCharacter()
                     allCharactersName.append(characterName)
                     let characterChoosed = Viking(name: characterName)
                     team.append(characterChoosed)
                     print("""
                     Your viking's called \(characterName)
-                    ---------------------------------------------------------
                     """)
                 case "2":
-                    print("You choose an Archer, give him a name :")
+                    print("""
+                    ---------------------------------------------------------
+                    You choose an Archer, give him a name :
+                    """)
                     let characterName = assignNameToCharacter()
                     allCharactersName.append(characterName)
                     let characterChoosed = Archer(name: characterName)
                     team.append(characterChoosed)
+                    print("""
+                    Your archer's called \(characterName)
+                    """)
                 case "3":
-                    print("You choose a Magician, give him a name :")
+                    print("""
+                    ---------------------------------------------------------
+                    You choose a Magician, give him a name :
+                    """)
                     let characterName = assignNameToCharacter()
                     allCharactersName.append(characterName)
                     let characterChoosed = Magician(name: characterName)
                     team.append(characterChoosed)
+                    print("""
+                    Your magician's called \(characterName)
+                    """)
                 case "4":
-                    print("You choose a Fairy, give her a name :")
+                    print("""
+                    ---------------------------------------------------------
+                    You choose a Fairy, give him a name :
+                    """)
                     let characterName = assignNameToCharacter()
                     allCharactersName.append(characterName)
                     let characterChoosed = Fairy(name: characterName)
                     team.append(characterChoosed)
+                    print("""
+                    Your fairy's called \(characterName)
+                    """)
                 default:
                     print("Choose a number between 1 and 4")
                 }
             }
         }
-        
     }
     
     /*
@@ -102,9 +123,12 @@ class Player {
      choice is between 1 or the number of characters remaining in the team so as not to choose a dead character
      */
     func selectACharacterForAction() -> Character {
-        print("Choose à number between 1 & 3 to select a character of your team to do an action with : ")
+        print("""
+            ---------------------------------------------------------
+            Choose à number between 1 & 3 to select a character of your team to do an action with :
+            """)
         for(index, character) in team.enumerated() {
-            print("\(index + 1)'s called \(character.name) : \(character.info())")
+            print("\(index + 1) is a \(character.defaultName) : \(character.info())")
         }
         if let choice = readLine() {
             if let intChoice = Int(choice) {

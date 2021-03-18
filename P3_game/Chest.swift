@@ -25,10 +25,17 @@ class Chest {
     private func isChestHere() -> Bool {
         let randomAppear = Int.random(in: 1...100)
         if randomAppear <= 50 {
-            print("A magic chest appears")
+            print("""
+            ---------------------------------------------------------
+            A magic chest appears
+            """)
             return true
         } else {
-            print("No magic chest appears")
+            print("""
+            ---------------------------------------------------------
+            No magic chest appears
+            ---------------------------------------------------------
+            """)
             return false
         }
     }
@@ -39,28 +46,50 @@ class Chest {
             let randomChestContent = Int.random(in: 1...3)
             switch randomChestContent {
             case 1:
-                print("\(character.name) found a Legendary Sword")
+                print("""
+                    ---------------------------------------------------------
+                    \(character.name) found a Legendary Sword
+                    """)
                 if character.type != .attack {
-                    print("Cannot assign an attack weapon to healing or magic characters")
+                    print("""
+                    Cannot assign an attack weapon to healing or magic characters
+                    ---------------------------------------------------------
+                    """)
                 } else {
                     character.weapon = attackWeapon
                 }
             case 2:
-                print("\(character.name) found a Celestial Lightening")
+                print("""
+                    ---------------------------------------------------------
+                    \(character.name) found a Celestial Lightening
+                    """)
                 if character.type != .magic {
-                    print("Cannot assign a magic weapon to attack or healing characters")
+                    print("""
+                    Cannot assign a magic weapon to attack or healing characters
+                    ---------------------------------------------------------
+                    """)
                 } else {
                     character.weapon = attackWeapon
                 }
             case 3:
-                print("\(character.name) found Elf Blood")
+                print("""
+                    ---------------------------------------------------------
+                    \(character.name) found Elf Blood
+                    """)
                 if character.type != .heal {
-                    print("Cannot assign an heal weapon to attack or magic characters")
+                    print("""
+                    Cannot assign an heal weapon to attack or magic characters
+                    ---------------------------------------------------------
+                    """)
                 } else {
                     character.weapon = attackWeapon
                 }
             default:
-                print("Can't process")
+                print("""
+                ---------------------------------------------------------
+                Can't process
+                ---------------------------------------------------------
+                """)
             }
         }
     }
