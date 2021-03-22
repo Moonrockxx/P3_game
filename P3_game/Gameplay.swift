@@ -9,11 +9,10 @@ import Foundation
 
 class Gameplay {
     
-    var playerOne: Player = Player(defaultName: "Player One", name: "", isPlayerAlive: true)
-    var playerTwo: Player = Player(defaultName: "Player Two", name: "", isPlayerAlive: true)
-    
-    var roundCount: Int = 0
-    var namesOfPlayers = [String] ()
+    private var playerOne: Player = Player(defaultName: "Player One", name: "", isPlayerAlive: true)
+    private var playerTwo: Player = Player(defaultName: "Player Two", name: "", isPlayerAlive: true)
+    private var roundCount: Int = 0
+    private var namesOfPlayers = [String] ()
     
     // - Function that allows to assign a name to each player
     private func assignNameToPlayer(player: Player) {
@@ -112,6 +111,13 @@ class Gameplay {
         self.gameOver()
     }
     
+    // - Function that allows to display the entire team even with a dead character
+    private func displayOriginalTeams(player: Player) {
+        player.originalTeam.forEach { (Character) in
+            print("\(Character.info())")
+        }
+    }
+    
     // - Function that displays the winner and the stats of the characters of each team
     private func gameOver() {
         if playerOne.isPlayerAlive {
@@ -153,15 +159,8 @@ class Gameplay {
         }
     }
     
-    // - Function that allows to display the entire team even with a dead character
-    private func displayOriginalTeams(player: Player) {
-        player.originalTeam.forEach { (Character) in
-            print("\(Character.info())")
-        }
-    }
-    
     // - Function that initialize the game by assign names for both players, each players pick 3 characters to start the battle
-    func start() {
+    public func start() {
         self.assignNameToPlayer(player: playerOne)
         self.assignNameToPlayer(player: playerTwo)
         

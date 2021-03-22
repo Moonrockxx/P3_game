@@ -9,18 +9,18 @@ import Foundation
 
 class Weapon {
     
-    enum weaponType: Int {
+    enum WeaponType: Int {
         case attack = 1
         case magic = 2
         case heal = 3
     }
     
     var name: String
-    var weaponType: weaponType
+    var weaponType: WeaponType
     var attackPower: Int
     var healPower: Int
     
-    init(name: String, weaponType: weaponType, attackPower: Int, healPower: Int) {
+    init(name: String, weaponType: WeaponType, attackPower: Int, healPower: Int) {
         self.name = name
         self.weaponType = weaponType
         self.attackPower = attackPower
