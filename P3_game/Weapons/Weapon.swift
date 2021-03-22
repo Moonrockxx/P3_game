@@ -9,7 +9,6 @@ import Foundation
 
 class Weapon {
     
-    // - ??
     enum weaponType: Int {
         case attack = 1
         case magic = 2

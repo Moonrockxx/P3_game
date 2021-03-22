@@ -20,16 +20,15 @@ class Character {
     let name: String
     var life: Int
     let type: characterType
+    let defaultWeapon: Weapon
     var weapon: Weapon
     
-//    var minLife: Int = 0
-//    var isAlive: Bool = true
-    
-    init(defaultName: String, name: String, life: Int, type: characterType, weapon: Weapon) {
+    init(defaultName: String, name: String, life: Int, type: characterType, defaultWeapon: Weapon, weapon: Weapon) {
         self.defaultName = defaultName
         self.name = name
         self.type = type
         self.life = life
+        self.defaultWeapon = defaultWeapon
         self.weapon = weapon
     }
     
@@ -51,9 +50,10 @@ class Character {
             target.life += self.weapon.healPower
         }
     }
+    
 }
 
-    // - Extension that not allows negative value
+// - Extension that not allows negative value
 extension Int {
     mutating func sub(value: Int, min: Int) {
         if (self - value) <= min {

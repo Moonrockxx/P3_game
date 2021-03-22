@@ -18,11 +18,14 @@ class Gameplay {
     // - Function that allows to assign a name to each player
     private func assignNameToPlayer(player: Player) {
         if player.name.isEmpty {
-            print("\(player.defaultName) Choose your nickname : ")
+            print("""
+                --------------------------------------------------------------------------------
+                ➡️ \(player.defaultName) Choose your nickname :
+                """)
             if let playerNameChoice = readLine() {
                 let nameChoice = playerNameChoice.trimmingCharacters(in: .whitespaces)
                 if nameChoice.count < 3 && namesOfPlayers.contains(nameChoice) {
-                    print("This nickname is already taken or must have at least 3 characters")
+                    print("❌ This nickname is already taken or must have at least 3 characters")
                 } else {
                     player.name = nameChoice
                     namesOfPlayers.append(nameChoice)
@@ -35,10 +38,16 @@ class Gameplay {
     private func whoSTurn() -> (attack: Player, defense: Player) {
         let currentTurn = roundCount % 2
         if currentTurn == 0 {
-            print("Player One's turn")
+            print("""
+                --------------------------------------------------------------------------------
+                ➡️ \(playerOne.name)'s turn
+                """)
             return (attack: playerOne, defense: playerTwo)
         } else {
-            print("Player Two's turn")
+            print("""
+                --------------------------------------------------------------------------------
+                ➡️ \(playerTwo.name)'s turn
+                """)
             return (attack: playerTwo, defense: playerOne)
         }
         
@@ -55,21 +64,36 @@ class Gameplay {
         if let fairy = attackingCharacter as? Fairy {
             let target = attack.selectACharacterForAction()
             fairy.action(target: target)
+            print("""
+                --------------------------------------------------------------------------------
+                \(target.name) has \(target.life) life points remaining
+                """)
         } else {
             let target = defense.selectACharacterForAction()
             attackingCharacter.action(target: target)
             if target.isAlive() {
-                print("\(target.name) has \(target.life) remaining")
+                print("""
+                --------------------------------------------------------------------------------
+                ➡️ \(target.name) has \(target.life) life points remaining
+                """)
             } else {
-                print("\(target.name)'s going to the graveyard")
+                print("""
+                --------------------------------------------------------------------------------
+                💀 \(target.name)'s going to the graveyard
+                """)
                 defense.graveyard.append(target)
             }
         }
-
+        attackingCharacter.weapon = attackingCharacter.defaultWeapon
     }
     
-    // - Function which allows to know if each member of the team is alive, if they're all dead the function returns false
+    // - Function which allows to know if each member of the team is alive, if they're not we remove them from the team. When the team has no members remaining the function return false.
     private func isPlayerAlive(player: Player) -> Bool {
+        for(index, character) in player.team.enumerated() {
+            if character.life <= 0 {
+                player.team.remove(at: index)
+            }
+        }
         if player.team.count == 0 {
             return false
         } else {
@@ -91,13 +115,48 @@ class Gameplay {
     // - Function that displays the winner and the stats of the characters of each team
     private func gameOver() {
         if playerOne.isPlayerAlive {
-            print("\(playerOne.name) wins the game")
-            print("Your team : \(playerOne.team)")
-            print("Loosing team : \(playerTwo.graveyard)")
+            print("""
+            --------------------------------------------------------------------------------
+            🏆 \(playerOne.name) wins the game 🏆
+            --------------------------------------------------------------------------------
+            """)
+            print("\(playerOne.name)'s team : ")
+            self.displayOriginalTeams(player: playerOne)
+            print("""
+            --------------------------------------------------------------------------------
+            \(playerTwo.name)'s team:
+            """)
+            self.displayOriginalTeams(player: playerTwo)
+            print("""
+            --------------------------------------------------------------------------------
+            Number of turns : \(self.roundCount)
+            --------------------------------------------------------------------------------
+            """)
         } else {
-            print("\(playerTwo.name) wins the game")
-            print("Your team : \(playerTwo.team)")
-            print("Loosing team : \(playerOne.graveyard)")
+            print("""
+            --------------------------------------------------------------------------------
+            🏆 \(playerTwo.name) wins the game 🏆
+            --------------------------------------------------------------------------------
+            """)
+            print("\(playerTwo.name)'s team : ")
+            self.displayOriginalTeams(player: playerTwo)
+            print("""
+            --------------------------------------------------------------------------------
+            \(playerOne.name)'s team:
+            """)
+            self.displayOriginalTeams(player: playerOne)
+            print("""
+            --------------------------------------------------------------------------------
+            Number of turns : \(self.roundCount)
+            --------------------------------------------------------------------------------
+            """)
+        }
+    }
+    
+    // - Function that allows to display the entire team even with a dead character
+    private func displayOriginalTeams(player: Player) {
+        player.originalTeam.forEach { (Character) in
+            print("\(Character.info())")
         }
     }
     
@@ -110,6 +169,6 @@ class Gameplay {
         playerTwo.selectCharactersForCreateTeam()
         
         battle()
-        
     }
+    
 }
