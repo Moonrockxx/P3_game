@@ -11,19 +11,20 @@ class Gameplay {
     
     private var playerOne: Player = Player(defaultName: "Player One", name: "", isPlayerAlive: true)
     private var playerTwo: Player = Player(defaultName: "Player Two", name: "", isPlayerAlive: true)
+    
     private var roundCount: Int = 0
     private var namesOfPlayers = [String] ()
     
     // - Function that allows to assign a name to each player
     private func assignNameToPlayer(player: Player) {
-        if player.name.isEmpty {
+        while player.name.isEmpty {
             print("""
                 --------------------------------------------------------------------------------
                 ➡️ \(player.defaultName) Choose your nickname :
                 """)
             if let playerNameChoice = readLine() {
                 let nameChoice = playerNameChoice.trimmingCharacters(in: .whitespaces)
-                if nameChoice.count < 3 && namesOfPlayers.contains(nameChoice) {
+                if nameChoice.count < 3 || namesOfPlayers.contains(nameChoice) {
                     print("❌ This nickname is already taken or must have at least 3 characters")
                 } else {
                     player.name = nameChoice
